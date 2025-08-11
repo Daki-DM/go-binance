@@ -36,6 +36,11 @@ type CreateOrderService struct {
 	goodTillDate            int64
 }
 
+func (s *CreateOrderService) Test(ctx context.Context, opts ...RequestOption) (err error) {
+	_, _, err = s.createOrder(ctx, "/fapi/v1/order/test", opts...)
+	return err
+}
+
 // Symbol set symbol
 func (s *CreateOrderService) Symbol(symbol string) *CreateOrderService {
 	s.symbol = symbol
