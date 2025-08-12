@@ -82,6 +82,16 @@ var (
 	BaseApiTestnetUrl = "https://testnet.binancefuture.com"
 )
 
+var ValidSides = map[string]SideType{
+	"BUY":  SideTypeBuy,
+	"kupi": SideTypeBuy,
+	"buy":  SideTypeBuy,
+
+	"sell":   SideTypeSell,
+	"prodaj": SideTypeSell,
+	"SELL":   SideTypeSell,
+}
+
 // Global enums
 const (
 	SideTypeBuy  SideType = "BUY"
@@ -204,6 +214,10 @@ const (
 	signatureKey  = "signature"
 	recvWindowKey = "recvWindow"
 )
+
+func getSideType(t string) SideType {
+	return ValidSides[t]
+}
 
 func currentTimestamp() int64 {
 	return int64(time.Nanosecond) * time.Now().UnixNano() / int64(time.Millisecond)
