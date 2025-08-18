@@ -26,6 +26,13 @@ func (s *ExchangeInfoService) Do(ctx context.Context, opts ...RequestOption) (re
 		endpoint: "/fapi/v1/exchangeInfo",
 		secType:  secTypeNone,
 	}
+	m := params{}
+	if s.symbol != "" {
+		m["symbol"] = s.symbol
+	}
+
+	r.setParams(m)
+
 	data, _, err := s.c.callAPI(ctx, r, opts...)
 	if err != nil {
 		return nil, err
