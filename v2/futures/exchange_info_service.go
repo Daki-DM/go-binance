@@ -10,7 +10,13 @@ import (
 
 // ExchangeInfoService exchange info service
 type ExchangeInfoService struct {
-	c *Client
+	c      *Client
+	symbol string
+}
+
+func (s *ExchangeInfoService) Symbol(symbol string) *ExchangeInfoService {
+	s.symbol = symbol
+	return s
 }
 
 // Do send request
