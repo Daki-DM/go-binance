@@ -141,10 +141,10 @@ const (
 
 	OrderTypeLimit              OrderType = "LIMIT"
 	OrderTypeMarket             OrderType = "MARKET"
-	OrderTypeStop               OrderType = "STOP"
-	OrderTypeStopMarket         OrderType = "STOP_MARKET"
-	OrderTypeTakeProfit         OrderType = "STOP_MARKET"
-	OrderTypeTakeProfitLimit    OrderType = "STOP"
+	OrderTypeStop               OrderType = "TAKE_PROFIT_LIMIT"
+	OrderTypeStopMarket         OrderType = "TAKE_PROFIT"
+	OrderTypeTakeProfit         OrderType = "TAKE_PROFIT"
+	OrderTypeTakeProfitLimit    OrderType = "TAKE_PROFIT_LIMIT"
 	OrderTypeTakeProfitMarket   OrderType = "TAKE_PROFIT_MARKET"
 	OrderTypeTrailingStopMarket OrderType = "TRAILING_STOP_MARKET"
 	OrderTypeLiquidation        OrderType = "LIQUIDATION"
@@ -247,9 +247,9 @@ const (
 	SelfTradePreventionModeExpireBoth  SelfTradePreventionMode = "EXPIRE_BOTH"
 	SelfTradePreventionModeExpireMaker SelfTradePreventionMode = "EXPIRE_MAKER"
 
-	StrategyTypeStop               StrategyType = "STOP"
-	StrategyTypeStopMarket         StrategyType = "STOP_MARKET"
-	StrategyTypeTakeProfit         StrategyType = "STOP_MARKET"
+	StrategyTypeStop               StrategyType = "TAKE_PROFIT_LIMIT"
+	StrategyTypeStopMarket         StrategyType = "TAKE_PROFIT"
+	StrategyTypeTakeProfit         StrategyType = "TAKE_PROFIT"
 	StrategyTypeTakeProfitMarket   StrategyType = "TAKE_PROFIT_MARKET"
 	StrategyTypeTrailingStopMarket StrategyType = "TRAILING_STOP_MARKET"
 

@@ -94,9 +94,9 @@ func (s *exchangeInfoServiceTestSuite) TestExchangeInfo() {
 				"orderType": [
 					"LIMIT",
 					"MARKET",
-					"STOP",
-					"STOP_MARKET",
-					"STOP_MARKET",
+					"TAKE_PROFIT_LIMIT",
+					"TAKE_PROFIT",
+					"TAKE_PROFIT",
 					"TAKE_PROFIT_MARKET",
 					"TRAILING_STOP_MARKET" 
 				],

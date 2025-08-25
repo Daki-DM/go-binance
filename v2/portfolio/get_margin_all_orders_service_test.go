@@ -31,7 +31,7 @@ func (s *getMarginAllOrdersServiceTestSuite) TestGetAllOrders() {
 			"symbol": "BNBBTC",
 			"time": 1565769338806,
 			"timeInForce": "GTC",
-			"type": "STOP",
+			"type": "TAKE_PROFIT_LIMIT",
 			"updateTime": 1565769342148,
 			"accountId": 152950866,
 			"selfTradePreventionMode": "EXPIRE_TAKER",
