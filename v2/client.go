@@ -147,8 +147,8 @@ const (
 	OrderTypeLimitMaker      OrderType = "LIMIT_MAKER"
 	OrderTypeStopLoss        OrderType = "STOP_LOSS"
 	OrderTypeStopLossLimit   OrderType = "STOP_LOSS_LIMIT"
-	OrderTypeTakeProfit      OrderType = "STOP_MARKET"
-	OrderTypeTakeProfitLimit OrderType = "STOP"
+	OrderTypeTakeProfit      OrderType = "TAKE_PROFIT"
+	OrderTypeTakeProfitLimit OrderType = "TAKE_PROFIT_LIMIT"
 
 	TimeInForceTypeGTC TimeInForceType = "GTC"
 	TimeInForceTypeIOC TimeInForceType = "IOC"

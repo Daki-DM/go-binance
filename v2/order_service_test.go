@@ -39,7 +39,7 @@ func (s *orderServiceTestSuite) TestCreateOrder() {
 	defer s.assertDo()
 	symbol := "LTCBTC"
 	side := SideTypeBuy
-	orderType := OrderTypeLimit
+	orderType := "TAKE_PROFIT_LIMIT"
 	timeInForce := TimeInForceTypeGTC
 	quantity := "12.00"
 	quoteOrderQty := "10.00"

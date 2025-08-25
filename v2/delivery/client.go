@@ -80,9 +80,9 @@ const (
 
 	OrderTypeLimit              OrderType = "LIMIT"
 	OrderTypeMarket             OrderType = "MARKET"
-	OrderTypeStop               OrderType = "STOP"
-	OrderTypeStopMarket         OrderType = "STOP_MARKET"
-	OrderTypeTakeProfit         OrderType = "STOP_MARKET"
+	OrderTypeStop               OrderType = "TAKE_PROFIT_LIMIT"
+	OrderTypeStopMarket         OrderType = "TAKE_PROFIT"
+	OrderTypeTakeProfit         OrderType = "TAKE_PROFIT"
 	OrderTypeTakeProfitMarket   OrderType = "TAKE_PROFIT_MARKET"
 	OrderTypeTrailingStopMarket OrderType = "TRAILING_STOP_MARKET"
 
