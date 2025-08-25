@@ -72,7 +72,7 @@ func (s *exchangeInfoServiceTestSuite) TestExchangeInfo() {
 					"LIMIT", 
 					"MARKET", 
 					"STOP",
-					"TAKE_PROFIT",
+					"STOP_MARKET",
 					"TRAILING_STOP_MARKET"
 				],
 				"timeInForce": [

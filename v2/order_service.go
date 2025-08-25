@@ -147,6 +147,7 @@ func (s *CreateOrderService) createOrder(ctx context.Context, endpoint string, o
 	if s.selfTradePreventionMode != nil {
 		m["selfTradePreventionMode"] = *s.selfTradePreventionMode
 	}
+	//add callbackrate
 	r.setFormParams(m)
 	data, err = s.c.callAPI(ctx, r, opts...)
 	if err != nil {

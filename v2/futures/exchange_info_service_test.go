@@ -96,7 +96,7 @@ func (s *exchangeInfoServiceTestSuite) TestExchangeInfo() {
 					"MARKET",
 					"STOP",
 					"STOP_MARKET",
-					"TAKE_PROFIT",
+					"STOP_MARKET",
 					"TAKE_PROFIT_MARKET",
 					"TRAILING_STOP_MARKET" 
 				],

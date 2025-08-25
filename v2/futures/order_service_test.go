@@ -619,7 +619,7 @@ func (s *orderServiceTestSuite) TestCancelOrder() {
 		"stopPrice": "8300",
 		"symbol": "BTCUSDT",
 		"timeInForce": "GTC",
-		"type": "TAKE_PROFIT",
+		"type": "STOP_MARKET",
 		"updateTime": 1571110484038,
 		"workingType": "CONTRACT_PRICE",
 		"activatePrice": "10000",

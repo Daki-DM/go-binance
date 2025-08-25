@@ -143,8 +143,8 @@ const (
 	OrderTypeMarket             OrderType = "MARKET"
 	OrderTypeStop               OrderType = "STOP"
 	OrderTypeStopMarket         OrderType = "STOP_MARKET"
-	OrderTypeTakeProfit         OrderType = "TAKE_PROFIT"
-	OrderTypeTakeProfitLimit    OrderType = "TAKE_PROFIT_LIMIT"
+	OrderTypeTakeProfit         OrderType = "STOP_MARKET"
+	OrderTypeTakeProfitLimit    OrderType = "STOP"
 	OrderTypeTakeProfitMarket   OrderType = "TAKE_PROFIT_MARKET"
 	OrderTypeTrailingStopMarket OrderType = "TRAILING_STOP_MARKET"
 	OrderTypeLiquidation        OrderType = "LIQUIDATION"
@@ -249,7 +249,7 @@ const (
 
 	StrategyTypeStop               StrategyType = "STOP"
 	StrategyTypeStopMarket         StrategyType = "STOP_MARKET"
-	StrategyTypeTakeProfit         StrategyType = "TAKE_PROFIT"
+	StrategyTypeTakeProfit         StrategyType = "STOP_MARKET"
 	StrategyTypeTakeProfitMarket   StrategyType = "TAKE_PROFIT_MARKET"
 	StrategyTypeTrailingStopMarket StrategyType = "TRAILING_STOP_MARKET"
 
