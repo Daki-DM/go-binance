@@ -34,6 +34,7 @@ type CreateOrderService struct {
 	closePosition           *string
 	selfTradePreventionMode *SelfTradePreventionMode
 	goodTillDate            int64
+	algo                    bool
 }
 
 func (s *CreateOrderService) Test(ctx context.Context, opts ...RequestOption) (err error) {
@@ -158,6 +159,11 @@ func (s *CreateOrderService) GoodTillDate(goodTillDate int64) *CreateOrderServic
 	return s
 }
 
+func (s *CreateOrderService) Algo(algo bool) *CreateOrderService {
+	s.algo = algo
+	return s
+}
+
 func (s *CreateOrderService) createOrder(ctx context.Context, endpoint string, opts ...RequestOption) (data []byte, header *http.Header, err error) {
 	r := &request{
 		method:   http.MethodPost,
@@ -227,7 +233,15 @@ func (s *CreateOrderService) createOrder(ctx context.Context, endpoint string, o
 
 // Do send request
 func (s *CreateOrderService) Do(ctx context.Context, opts ...RequestOption) (res *CreateOrderResponse, err error) {
-	data, header, err := s.createOrder(ctx, "/fapi/v1/order", opts...)
+	var data []byte
+	var header *http.Header
+
+	if s.algo {
+		data, header, err = s.createOrder(ctx, "/fapi/v1/order", opts...)
+
+	} else {
+		data, header, err = s.createOrder(ctx, "/fapi/v1/algoOrder", opts...)
+	}
 	if err != nil {
 		return nil, err
 	}
