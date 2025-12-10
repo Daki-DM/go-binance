@@ -38,7 +38,13 @@ type CreateOrderService struct {
 }
 
 func (s *CreateOrderService) Test(ctx context.Context, opts ...RequestOption) (err error) {
-	_, _, err = s.createOrder(ctx, "/fapi/v1/order/test", opts...)
+	if s.algo {
+		_, _, err = s.createOrder(ctx, "/fapi/v1/algoOrder/test", opts...)
+
+	} else {
+		_, _, err = s.createOrder(ctx, "/fapi/v1/order/test", opts...)
+
+	}
 	return err
 }
 
