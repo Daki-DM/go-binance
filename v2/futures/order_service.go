@@ -246,7 +246,7 @@ func (s *CreateOrderService) Do(ctx context.Context, opts ...RequestOption) (res
 	var data []byte
 	var header *http.Header
 
-	if s.algo {
+	if s.algo { //test
 		data, header, err = s.createOrder(ctx, "/fapi/v1/algoOrder", opts...)
 
 	} else {
