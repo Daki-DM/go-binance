@@ -247,10 +247,10 @@ func (s *CreateOrderService) Do(ctx context.Context, opts ...RequestOption) (res
 	var header *http.Header
 
 	if s.algo {
-		data, header, err = s.createOrder(ctx, "/fapi/v1/order", opts...)
+		data, header, err = s.createOrder(ctx, "/fapi/v1/algoOrder", opts...)
 
 	} else {
-		data, header, err = s.createOrder(ctx, "/fapi/v1/algoOrder", opts...)
+		data, header, err = s.createOrder(ctx, "/fapi/v1/order", opts...)
 	}
 	if err != nil {
 		return nil, err
