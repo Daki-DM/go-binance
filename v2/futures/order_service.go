@@ -230,6 +230,9 @@ func (s *CreateOrderService) createOrder(ctx context.Context, endpoint string, o
 	if s.goodTillDate > 0 && *s.timeInForce == TimeInForceTypeGTD {
 		m["goodTillDate"] = s.goodTillDate
 	}
+	if s.algo {
+		m["algoType"] = "CONDITIONAL"
+	}
 	r.setFormParams(m)
 	data, header, err = s.c.callAPI(ctx, r, opts...)
 	if err != nil {
