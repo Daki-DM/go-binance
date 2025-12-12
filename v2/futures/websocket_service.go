@@ -1065,6 +1065,8 @@ type WsUserDataEvent struct {
 
 	// CONDITIONAL_ORDER_TRIGGER_REJECT
 	WsUserDataConditionalOrderTriggerReject
+
+	WsUserDataAlgoUpdate
 }
 
 type WsUserDataAccountConfigUpdate struct {
@@ -1081,6 +1083,10 @@ type WsUserDataMarginCall struct {
 }
 
 type WsUserDataOrderTradeUpdate struct {
+	OrderTradeUpdate WsOrderTradeUpdate `json:"o"`
+}
+
+type WsUserDataAlgoUpdate struct {
 	OrderTradeUpdate WsOrderTradeUpdate `json:"o"`
 }
 
@@ -1132,6 +1138,7 @@ func (e *WsUserDataEvent) UnmarshalJSON(data []byte) error {
 		UserDataEventTypeOrderTradeUpdate:              &e.WsUserDataOrderTradeUpdate,
 		UserDataEventTypeAccountConfigUpdate:           &e.WsUserDataAccountConfigUpdate,
 		UserDataEventTypeConditionalOrderTriggerReject: &e.WsUserDataConditionalOrderTriggerReject,
+		UserDataEventTypeAlgoUpdate:                    &e.WsUserDataAlgoUpdate,
 	}
 
 	switch e.Event {
