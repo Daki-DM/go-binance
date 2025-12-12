@@ -18,6 +18,7 @@ import (
 	"github.com/Daki-DM/go-binance/v2/common"
 )
 
+// test
 // SideType define side type of order
 type SideType string
 
