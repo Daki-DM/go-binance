@@ -1088,7 +1088,7 @@ type WsUserDataOrderTradeUpdate struct {
 }
 
 type WsUserDataAlgoUpdate struct {
-	OrderTradeUpdate WsOrderTradeUpdate `json:"o"`
+	AlgoTradeUpdate WsAlgoOrderTradeUpdate `json:"o"`
 }
 
 type WsUserDataTradeLite struct {
@@ -1224,6 +1224,39 @@ type WsOrderTradeUpdate struct {
 	STP                  string             `json:"V"`   // STP mode
 	PriceMode            string             `json:"pm"`  // Price match mode
 	GTD                  int64              `json:"gtd"` // TIF GTD order auto cancel time
+}
+
+// WsAlgoOrder contains the algo order details
+type WsAlgoOrderTradeUpdate struct {
+	ClientAlgoID string           `json:"caid"` // Client Algo Id (user-defined)
+	AlgoID       int64            `json:"aid"`  // System-generated Algo Id
+	AlgoType     string           `json:"at"`   // Algo Type: "CONDITIONAL", "OCO", etc.
+	OrderType    OrderType        `json:"o"`    // Order Type inside the algo: TAKE_PROFIT, STOP, etc.
+	Symbol       string           `json:"s"`    // Symbol
+	Side         SideType         `json:"S"`    // BUY / SELL
+	PositionSide PositionSideType `json:"ps"`   // BOTH / LONG / SHORT
+	TimeInForce  TimeInForceType  `json:"f"`    // GTC, IOC, etc.
+	Quantity     string           `json:"q"`    // Original quantity
+	AlgoStatus   OrderStatusType  `json:"X"`    // Algo status: NEW, CANCELED, EXPIRED, FILLED, etc.
+
+	// Fields only present after the algo order has been triggered and placed in the matching engine
+	OrderID         string `json:"ai"`  // Regular order ID (empty if not yet triggered)
+	AvgPrice        string `json:"ap"`  // Average fill price in matching engine
+	FilledQty       string `json:"aq"`  // Executed quantity in matching engine
+	ActualOrderType string `json:"act"` // Actual order type sent to matching engine (e.g. "LIMIT")
+
+	// Conditional order specific fields
+	Price          string      `json:"p"`   // Order price (LIMIT price)
+	TriggerPrice   string      `json:"tp"`  // Trigger price for TAKE_PROFIT / STOP etc.
+	TriggerTime    int64       `json:"tt"`  // Time when trigger condition was met (ms)
+	STPMode        string      `json:"V"`   // EXPIRE_MAKER, EXPIRE_TAKER, EXPIRE_BOTH, NONE
+	WorkingType    WorkingType `json:"wt"`  // CONTRACT_PRICE, MARK_PRICE
+	PriceMatchMode string      `json:"pm"`  // NONE, OPPONENT, QUEUE, etc.
+	CloseAll       bool        `json:"cp"`  // Close-All requested
+	PriceProtect   bool        `json:"pP"`  // Price protection enabled
+	ReduceOnly     bool        `json:"R"`   // Reduce-only
+	GTD            int64       `json:"gtd"` // Good-Till-Date timestamp (ms) for GTD orders
+	FailedReason   string      `json:"rm"`  // Reason when algo order failed (e.g. "Reduce Only reject")
 }
 
 // WsAccountConfigUpdate define account config update
