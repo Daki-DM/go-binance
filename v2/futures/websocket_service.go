@@ -1257,6 +1257,8 @@ type WsAlgoOrderTradeUpdate struct {
 	ReduceOnly     bool        `json:"R"`   // Reduce-only
 	GTD            int64       `json:"gtd"` // Good-Till-Date timestamp (ms) for GTD orders
 	FailedReason   string      `json:"rm"`  // Reason when algo order failed (e.g. "Reduce Only reject")
+	CallbackRate   string      `json:"cr"`  // Reason when algo order failed (e.g. "Reduce Only reject")
+
 }
 
 // WsAccountConfigUpdate define account config update
