@@ -1066,6 +1066,7 @@ type WsUserDataEvent struct {
 	// CONDITIONAL_ORDER_TRIGGER_REJECT
 	WsUserDataConditionalOrderTriggerReject
 
+	// ALGO_UPDATE
 	WsUserDataAlgoUpdate
 }
 
