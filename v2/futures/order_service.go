@@ -591,7 +591,7 @@ func (s *GetOrderService) Do(ctx context.Context, opts ...RequestOption) (res *O
 }
 
 // Order define order info
-type Order struct {
+/* type Order struct {
 	Symbol                  string           `json:"symbol"`
 	OrderID                 int64            `json:"orderId"`
 	ClientOrderID           string           `json:"clientOrderId"`
@@ -619,6 +619,46 @@ type Order struct {
 	PriceMatch              string           `json:"priceMatch"`
 	SelfTradePreventionMode string           `json:"selfTradePreventionMode"`
 	GoodTillDate            int64            `json:"goodTillDate"`
+} */
+
+type Order struct {
+	Symbol                  string           `json:"symbol"`
+	OrderID                 int64            `json:"orderId"`       // Present in standard orders
+	AlgoID                  int64            `json:"algoId"`        // Present in algo orders (e.g., TAKE_PROFIT, STOP)
+	ClientOrderID           string           `json:"clientOrderId"` // For standard orders
+	ClientAlgoID            string           `json:"clientAlgoId"`  // For algo orders (optional, can be used interchangeably)
+	Price                   string           `json:"price"`
+	ReduceOnly              bool             `json:"reduceOnly"`
+	OrigQuantity            string           `json:"origQty"`  // Standard orders use origQty
+	Quantity                string           `json:"quantity"` // Algo orders use quantity (maps to origQty logically)
+	ExecutedQuantity        string           `json:"executedQty"`
+	CumQuantity             string           `json:"cumQty"` // Deprecated, but still returned sometimes
+	CumQuote                string           `json:"cumQuote"`
+	Status                  OrderStatusType  `json:"status"`               // Standard order status
+	AlgoStatus              string           `json:"algoStatus,omitempty"` // Algo-specific status (NEW, WORKING, etc.)
+	TimeInForce             TimeInForceType  `json:"timeInForce"`
+	Type                    OrderType        `json:"type"`
+	OrderType               string           `json:"orderType,omitempty"` // Algo responses use "orderType"
+	Side                    SideType         `json:"side"`
+	StopPrice               string           `json:"stopPrice"`
+	TriggerPrice            string           `json:"triggerPrice,omitempty"` // Used in algo conditional orders
+	Time                    int64            `json:"time"`                   // Creation time (standard)
+	CreateTime              int64            `json:"createTime,omitempty"`   // Algo orders use createTime
+	UpdateTime              int64            `json:"updateTime"`
+	WorkingType             WorkingType      `json:"workingType"`
+	ActivatePrice           string           `json:"activatePrice"`
+	PriceRate               string           `json:"priceRate"` // callbackRate in trailing orders
+	CallbackRate            string           `json:"callbackRate,omitempty"`
+	AvgPrice                string           `json:"avgPrice"`
+	OrigType                OrderType        `json:"origType"`
+	PositionSide            PositionSideType `json:"positionSide"`
+	PriceProtect            bool             `json:"priceProtect"`
+	ClosePosition           bool             `json:"closePosition"`
+	PriceMatch              string           `json:"priceMatch"`
+	SelfTradePreventionMode string           `json:"selfTradePreventionMode"`
+	GoodTillDate            int64            `json:"goodTillDate"`
+	TriggerTime             int64            `json:"triggerTime,omitempty"`     // When the algo was triggered
+	IcebergQuantity         *string          `json:"icebergQuantity,omitempty"` // Can be null
 }
 
 // ListOrdersService all account orders; active, canceled, or filled
