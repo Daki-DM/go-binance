@@ -661,6 +661,32 @@ type Order struct {
 	IcebergQuantity         *string          `json:"icebergQuantity,omitempty"` // Can be null
 }
 
+func (o *Order) Normalize() {
+	if o.AlgoID > 0 {
+		// It's an algo order
+		if o.Quantity != "" && o.OrigQuantity == "" {
+			o.OrigQuantity = o.Quantity
+		}
+		if o.OrderType != "" {
+			o.Type = OrderType(o.OrderType)
+			o.OrigType = o.Type
+		}
+		if o.CreateTime > 0 && o.Time == 0 {
+			o.Time = o.CreateTime
+		}
+		o.OrderID = o.AlgoID
+	}
+	if o.ClientAlgoID != "" && o.ClientOrderID == "" {
+		o.ClientOrderID = o.ClientAlgoID
+	}
+	if o.TriggerPrice != "" && o.StopPrice == "" {
+		o.StopPrice = o.TriggerPrice
+	}
+	if o.CallbackRate != "" && o.PriceRate == "" {
+		o.PriceRate = o.CallbackRate
+	}
+}
+
 // ListOrdersService all account orders; active, canceled, or filled
 type ListOrdersService struct {
 	c         *Client
