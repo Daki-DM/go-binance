@@ -564,15 +564,18 @@ func (s *GetOrderService) Do(ctx context.Context, opts ...RequestOption) (res *O
 
 	if s.algo {
 		r.endpoint = "/fapi/v1/algoOrder"
+		r.setParam("algoid", *s.orderID)
 	} else {
 		r.endpoint = "/fapi/v1/order"
+		r.setParam("orderId", *s.orderID)
 	}
 
 	r.setParam("symbol", s.symbol)
-	if s.orderID != nil {
-		r.setParam("orderId", *s.orderID)
-	}
-	if s.origClientOrderID != nil {
+	/*
+		 	if s.orderID != nil {
+				r.setParam("orderId", *s.orderID)
+			}
+	*/if s.origClientOrderID != nil {
 		r.setParam("origClientOrderId", *s.origClientOrderID)
 	}
 	data, _, err := s.c.callAPI(ctx, r, opts...)
@@ -694,6 +697,7 @@ func (s *ListOrdersService) Do(ctx context.Context, opts ...RequestOption) (res 
 type CancelOrderService struct {
 	c                 *Client
 	symbol            string
+	algo              bool
 	orderID           *int64
 	origClientOrderID *string
 }
@@ -710,6 +714,11 @@ func (s *CancelOrderService) OrderID(orderID int64) *CancelOrderService {
 	return s
 }
 
+func (s *CancelOrderService) Algo(algo bool) *CancelOrderService {
+	s.algo = algo
+	return s
+}
+
 // OrigClientOrderID set origClientOrderID
 func (s *CancelOrderService) OrigClientOrderID(origClientOrderID string) *CancelOrderService {
 	s.origClientOrderID = &origClientOrderID
@@ -719,10 +728,19 @@ func (s *CancelOrderService) OrigClientOrderID(origClientOrderID string) *Cancel
 // Do send request
 func (s *CancelOrderService) Do(ctx context.Context, opts ...RequestOption) (res *CancelOrderResponse, err error) {
 	r := &request{
-		method:   http.MethodDelete,
-		endpoint: "/fapi/v1/order",
-		secType:  secTypeSigned,
+		method: http.MethodDelete,
+		//		endpoint: "/fapi/v1/order",
+		secType: secTypeSigned,
 	}
+
+	if s.algo {
+		r.endpoint = "/fapi/v1/algoOrder"
+		r.setFormParam("algoId", *s.orderID)
+	} else {
+		r.endpoint = "/fapi/v1/order"
+		r.setFormParam("orderId", *s.orderID)
+	}
+
 	r.setFormParam("symbol", s.symbol)
 	if s.orderID != nil {
 		r.setFormParam("orderId", *s.orderID)
