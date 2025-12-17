@@ -742,9 +742,9 @@ func (s *CancelOrderService) Do(ctx context.Context, opts ...RequestOption) (res
 	}
 
 	r.setFormParam("symbol", s.symbol)
-	if s.orderID != nil {
+	/* 	if s.orderID != nil {
 		r.setFormParam("orderId", *s.orderID)
-	}
+	} */
 	if s.origClientOrderID != nil {
 		r.setFormParam("origClientOrderId", *s.origClientOrderID)
 	}
