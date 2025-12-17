@@ -525,6 +525,7 @@ func (s *GetOpenOrderService) Do(ctx context.Context, opts ...RequestOption) (re
 type GetOrderService struct {
 	c                 *Client
 	symbol            string
+	algo              bool
 	orderID           *int64
 	origClientOrderID *string
 }
@@ -532,6 +533,11 @@ type GetOrderService struct {
 // Symbol set symbol
 func (s *GetOrderService) Symbol(symbol string) *GetOrderService {
 	s.symbol = symbol
+	return s
+}
+
+func (s *GetOrderService) Algo(algo bool) *GetOrderService {
+	s.algo = algo
 	return s
 }
 
@@ -549,11 +555,19 @@ func (s *GetOrderService) OrigClientOrderID(origClientOrderID string) *GetOrderS
 
 // Do send request
 func (s *GetOrderService) Do(ctx context.Context, opts ...RequestOption) (res *Order, err error) {
+
 	r := &request{
-		method:   http.MethodGet,
-		endpoint: "/fapi/v1/order",
-		secType:  secTypeSigned,
+		method: http.MethodGet,
+		//	endpoint: "/fapi/v1/order",
+		secType: secTypeSigned,
 	}
+
+	if s.algo {
+		r.endpoint = "/fapi/v1/algoOrder"
+	} else {
+		r.endpoint = "/fapi/v1/order"
+	}
+
 	r.setParam("symbol", s.symbol)
 	if s.orderID != nil {
 		r.setParam("orderId", *s.orderID)
